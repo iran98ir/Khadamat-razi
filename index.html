@@ -19,10 +19,7 @@
   --lime:#E9FA76;
   --ink:#28213D;
   --muted:#898398;
-  --white:rgba(255,255,255,.76);
-  --glass:rgba(255,255,255,.48);
   --line:rgba(112,70,232,.17);
-  --shadow:0 24px 70px rgba(72,49,130,.11);
 }
 
 *{
@@ -32,329 +29,184 @@
   -webkit-tap-highlight-color:transparent;
 }
 
-html{ scroll-behavior:smooth; }
-
 body{
   min-height:100vh;
-  padding:28px 18px;
+  padding:20px 16px;
   display:flex;
   justify-content:center;
   align-items:flex-start;
-  overflow-x:hidden;
   color:var(--ink);
   font-family:'Vazirmatn',sans-serif;
   background:
-    radial-gradient(ellipse at 12% 6%,rgba(112,70,232,.12),transparent 32%),
-    radial-gradient(ellipse at 90% 94%,rgba(233,250,118,.40),transparent 30%),
+    radial-gradient(ellipse at 15% 8%,rgba(112,70,232,.10),transparent 30%),
+    radial-gradient(ellipse at 88% 92%,rgba(233,250,118,.32),transparent 28%),
     #F7F4ED;
 }
 
-/* نقطه‌چین ظریف پس‌زمینه */
+/* خط عمودی تزئینی سمت راست */
 body::before{
   content:"";
   position:fixed;
-  inset:0;
+  top:60px;
+  right:22px;
+  bottom:60px;
+  width:1px;
+  background-image:linear-gradient(to bottom,rgba(112,70,232,.30) 50%,transparent 50%);
+  background-size:1px 10px;
   pointer-events:none;
-  opacity:.28;
-  background-image:radial-gradient(rgba(112,70,232,.22) .7px,transparent .7px);
-  background-size:20px 20px;
-  mask-image:linear-gradient(to bottom,black,transparent 92%);
+  opacity:.5;
 }
 
 .page{
-  position:relative;
-  z-index:1;
   width:100%;
-  max-width:460px;
-  margin:auto;
-  animation:pageEnter .9s cubic-bezier(.2,.8,.2,1) both;
+  max-width:430px;
+  margin:0 auto;
 }
 
-@keyframes pageEnter{
-  from{opacity:0;transform:translateY(28px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
-/* ---------- برند بالا ---------- */
-.brand{
+/* ===== بالای صفحه: برند ===== */
+.top-bar{
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:14px;
-  margin-bottom:22px;
+  gap:10px;
+  margin-bottom:20px;
+  padding:0 4px;
 }
 
-.brand-line{
+.top-bar .dash{
   flex:1;
-  height:1px;
-  max-width:70px;
-  background:linear-gradient(90deg,transparent,rgba(112,70,232,.5));
+  height:1.5px;
+  max-width:48px;
+  background-image:linear-gradient(90deg,rgba(112,70,232,.45) 50%,transparent 50%);
+  background-size:6px 1.5px;
 }
 
-.brand-line.right{
-  background:linear-gradient(90deg,rgba(112,70,232,.5),transparent);
+.top-bar .dash.right{
+  transform:scaleX(-1);
 }
 
-.brand-dot{
-  width:9px;
-  height:9px;
-  border-radius:50%;
-  background:var(--purple);
-  box-shadow:0 0 0 4px rgba(112,70,232,.14);
-  position:relative;
-}
-
-.brand-dot::after{
-  content:"";
-  position:absolute;
-  inset:-6px;
-  border-radius:50%;
-  border:1px dashed rgba(112,70,232,.35);
-  animation:spin 14s linear infinite;
-}
-
-@keyframes spin{ to{ transform:rotate(360deg); } }
-
-.brand-text{
+.top-bar .label{
   color:var(--purple);
-  font-size:11px;
+  font-size:10px;
   font-weight:800;
-  letter-spacing:.6px;
+  letter-spacing:.4px;
   white-space:nowrap;
 }
 
-/* ---------- قاب اصلی با گوشه‌های تزئینی ---------- */
-.stage{
-  position:relative;
-  padding:11px;
-  border-radius:38px;
-  background:rgba(255,255,255,.42);
-  border:1px solid rgba(112,70,232,.20);
-  box-shadow:
-    0 30px 80px rgba(66,43,124,.12),
-    inset 0 1px 0 rgba(255,255,255,.95);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-}
-
-/* گوشه‌های ضخیم خط‌چین */
-.stage::before,
-.stage::after{
-  content:"";
-  position:absolute;
-  width:56px;
-  height:56px;
-  pointer-events:none;
-  border-color:rgba(112,70,232,.55);
-  border-style:solid;
-}
-
-.stage::before{
-  top:22px;
-  right:22px;
-  border-width:2.5px 2.5px 0 0;
-  border-radius:0 22px 0 0;
-  border-top-style:dashed;
-}
-
-.stage::after{
-  bottom:22px;
-  left:22px;
-  border-width:0 0 2.5px 2.5px;
-  border-radius:0 0 0 22px;
-  border-left-style:dashed;
-}
-
-/* خطوط ظریف نقطه‌چین کناری */
-.side-tick{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  display:flex;
-  flex-direction:column;
-  gap:7px;
-  pointer-events:none;
-}
-.side-tick.left{ left:3px; }
-.side-tick.right{ right:3px; }
-
-.side-tick span{
-  width:4px;
-  height:4px;
-  border-radius:50%;
-  background:rgba(112,70,232,.42);
-}
-
-/* ---------- کارت داخلی ---------- */
+/* ===== کارت اصلی ===== */
 .card{
   position:relative;
-  border-radius:29px;
+  border-radius:28px;
+  background:rgba(255,255,255,.80);
+  border:1.5px solid rgba(112,70,232,.20);
+  box-shadow:0 20px 55px rgba(66,43,124,.10);
   overflow:hidden;
-  background:rgba(255,255,255,.78);
-  border:1px solid rgba(255,255,255,.95);
 }
 
-/* ---------- هدر ---------- */
+/* گوشه بالا راست: خط ضخیم */
+.card::before{
+  content:"";
+  position:absolute;
+  top:14px;
+  right:14px;
+  width:42px;
+  height:42px;
+  border-top:2.5px solid rgba(112,70,232,.50);
+  border-right:2.5px solid rgba(112,70,232,.50);
+  border-radius:0 16px 0 0;
+  pointer-events:none;
+  z-index:2;
+}
+
+/* گوشه پایین چپ: نقطه‌چین */
+.card::after{
+  content:"";
+  position:absolute;
+  bottom:14px;
+  left:14px;
+  width:42px;
+  height:42px;
+  border-bottom:2px dotted rgba(112,70,232,.42);
+  border-left:2px dotted rgba(112,70,232,.42);
+  border-radius:0 0 0 16px;
+  pointer-events:none;
+  z-index:2;
+}
+
+/* ===== هدر: آیکون + نام + دکمه ===== */
 .hero{
   position:relative;
-  padding:34px 22px 30px;
+  padding:30px 22px 26px;
   display:flex;
   flex-direction:column;
   align-items:center;
-  overflow:hidden;
   background:
-    radial-gradient(circle at 50% 30%,rgba(255,255,255,.22),transparent 40%),
-    linear-gradient(150deg,#8B67F3 0%,#7046E8 52%,#4A2CA8 100%);
+    radial-gradient(circle at 50% 0%,rgba(255,255,255,.20),transparent 55%),
+    linear-gradient(160deg,#7A54EF 0%,#7046E8 45%,#5031B4 100%);
 }
 
-.hero::before{
-  content:"";
+/* نقطه‌های پراکنده ظریف روی هدر */
+.hero .dot{
   position:absolute;
-  width:340px;
-  height:340px;
   border-radius:50%;
-  border:1.5px dashed rgba(255,255,255,.20);
-  top:-215px;
-  left:-110px;
-  animation:spin 40s linear infinite;
+  background:rgba(233,250,118,.55);
+  pointer-events:none;
 }
-
-.hero::after{
-  content:"";
-  position:absolute;
-  width:260px;
-  height:260px;
-  border-radius:50%;
-  border:1px solid rgba(233,250,118,.28);
-  bottom:-200px;
-  right:-80px;
-}
-
-.hero-grid{
-  position:absolute;
-  inset:0;
-  opacity:.10;
-  background-image:
-    linear-gradient(rgba(255,255,255,.3) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.3) 1px,transparent 1px);
-  background-size:36px 36px;
-  mask-image:radial-gradient(ellipse at center,black,transparent 75%);
-}
-
-/* نوار بالا */
-.top-strip{
-  position:relative;
-  z-index:2;
-  width:100%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:22px;
-}
-
-.hero-tag{
-  padding:6px 13px;
-  border-radius:30px;
-  border:1.5px dashed rgba(255,255,255,.42);
-  background:rgba(255,255,255,.14);
-  color:#fff;
-  font-size:9px;
-  font-weight:800;
-  backdrop-filter:blur(10px);
-}
-
-.hero-mini-dots{
-  display:flex;
-  gap:5px;
-}
-
-.hero-mini-dots span{
-  width:5px;
-  height:5px;
-  border-radius:50%;
-  background:rgba(255,255,255,.5);
-}
-.hero-mini-dots span:first-child{
-  background:var(--lime);
-  box-shadow:0 0 10px rgba(233,250,118,.9);
-}
+.hero .dot.a{ top:18px; left:24px; width:4px; height:4px; }
+.hero .dot.b{ top:42px; left:40px; width:3px; height:3px; opacity:.4; }
+.hero .dot.c{ bottom:20px; right:30px; width:3px; height:3px; opacity:.5; }
 
 /* آیکون */
-.icon-wrap{
+.icon-box{
   position:relative;
-  z-index:2;
-  width:124px;
-  height:124px;
-  padding:8px;
-  border-radius:36px;
-  background:rgba(255,255,255,.16);
-  border:1.5px dashed rgba(255,255,255,.52);
-  box-shadow:0 18px 40px rgba(34,16,86,.28), inset 0 1px 0 rgba(255,255,255,.4);
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
+  z-index:1;
+  width:88px;
+  height:88px;
+  padding:5px;
+  border-radius:24px;
+  border:1.5px dashed rgba(255,255,255,.48);
+  background:rgba(255,255,255,.12);
+  box-shadow:0 10px 28px rgba(34,16,86,.22);
 }
 
-.icon-wrap::before{
-  content:"";
-  position:absolute;
-  inset:-7px;
-  border-radius:42px;
-  border:1px dashed rgba(233,250,118,.4);
-  animation:spin 22s linear infinite reverse;
-}
-
-.app-icon{
+.icon-box img{
   width:100%;
   height:100%;
   object-fit:cover;
-  border-radius:28px;
+  border-radius:19px;
   background:#F7F4ED;
-  border:1px solid rgba(255,255,255,.85);
-  animation:floaty 4.5s ease-in-out infinite;
+  display:block;
 }
 
-@keyframes floaty{
-  0%,100%{ transform:translateY(0); }
-  50%{ transform:translateY(-6px); }
-}
-
-.app-title{
+/* نام و زیرنویس */
+.app-name{
   position:relative;
-  z-index:2;
-  margin-top:20px;
+  z-index:1;
+  margin-top:16px;
   color:#fff;
-  font-size:27px;
+  font-size:23px;
   font-weight:900;
   line-height:1.5;
   text-align:center;
-  letter-spacing:-.3px;
 }
 
 .app-sub{
   position:relative;
-  z-index:2;
+  z-index:1;
   margin-top:2px;
-  color:rgba(255,255,255,.85);
-  font-size:11px;
+  color:rgba(255,255,255,.80);
+  font-size:10.5px;
   font-weight:500;
   text-align:center;
 }
 
-/* خط نقطه‌چین زیر هدر */
-.dot-divider{
-  height:1px;
-  background-image:linear-gradient(90deg,rgba(112,70,232,.35) 40%,transparent 40%);
-  background-size:9px 1px;
-  background-repeat:repeat-x;
+/* ===== بخش بدنه ===== */
+.body{
+  padding:22px 20px 20px;
 }
 
-/* ---------- محتوا ---------- */
-.content{
-  padding:24px 20px 22px;
-}
-
-/* ردیف نسخه */
-.release-row{
+/* ردیف اعتماد: نسخه + سیستم */
+.trust-row{
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -362,255 +214,99 @@ body::before{
   margin-bottom:18px;
 }
 
-.release-pill{
+.trust-badge{
   display:flex;
   align-items:center;
-  gap:8px;
-  padding:8px 13px;
-  border-radius:30px;
-  border:1.5px dotted rgba(112,70,232,.40);
-  background:rgba(112,70,232,.06);
+  gap:7px;
+  padding:7px 12px;
+  border-radius:24px;
+  border:1.5px dotted rgba(112,70,232,.38);
+  background:rgba(112,70,232,.05);
   color:var(--purple-dark);
-  font-size:10px;
+  font-size:9.5px;
   font-weight:800;
 }
 
-.release-dot{
-  width:7px;
-  height:7px;
+.trust-badge .dot{
+  width:6px;
+  height:6px;
   border-radius:50%;
   background:#86A800;
-  box-shadow:0 0 0 4px rgba(134,168,0,.14);
-  animation:pulseDot 2s ease-in-out infinite;
+  box-shadow:0 0 0 3px rgba(134,168,0,.13);
 }
 
-@keyframes pulseDot{
-  0%,100%{ opacity:1; }
-  50%{ opacity:.35; }
-}
-
-.release-version{
+.trust-version{
   color:#9992A7;
-  font-size:10px;
+  font-size:9.5px;
   font-weight:700;
   direction:ltr;
-  padding:7px 11px;
-  border-radius:30px;
-  border:1px solid rgba(112,70,232,.14);
-  background:rgba(255,255,255,.5);
-}
-
-/* عنوان و توضیح */
-.heading{
-  text-align:center;
-  color:#2D2444;
-  font-size:22px;
-  font-weight:900;
-  line-height:1.7;
-}
-
-.desc{
-  text-align:center;
-  color:var(--muted);
-  font-size:11px;
-  line-height:2.15;
-  margin-top:5px;
-  padding:0 4px;
-}
-
-/* ---------- مشخصات با خطوط ضخیم و متنوع ---------- */
-.specs{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:9px;
-  margin:24px 0 20px;
-}
-
-.spec{
-  position:relative;
-  padding:16px 5px 13px;
-  text-align:center;
-  border-radius:18px;
-  background:linear-gradient(150deg,rgba(255,255,255,.95),rgba(245,242,253,.72));
-  border:1.5px solid rgba(112,70,232,.16);
-  box-shadow:inset 0 1px 0 #fff;
-  overflow:hidden;
-}
-
-.spec:nth-child(1){ border-bottom:2.5px solid var(--purple); }
-.spec:nth-child(2){ border-top:2.5px dotted var(--purple); }
-.spec:nth-child(3){ border-left:2.5px dashed var(--purple); }
-
-.spec::after{
-  content:"";
-  position:absolute;
-  top:7px;
-  right:7px;
-  width:4px;
-  height:4px;
-  border-radius:50%;
-  background:rgba(233,250,118,.9);
-  box-shadow:0 0 0 2px rgba(233,250,118,.25);
-}
-
-.spec-value{
-  color:var(--purple-dark);
-  font-size:13px;
-  font-weight:900;
-  direction:ltr;
-  white-space:nowrap;
-}
-
-.spec-label{
-  margin-top:6px;
-  color:#9690A1;
-  font-size:9px;
-  font-weight:600;
-}
-
-/* ---------- پنل اطلاعات ---------- */
-.info-panel{
-  position:relative;
-  padding:17px 15px;
+  padding:6px 10px;
   border-radius:20px;
-  border:1.5px dashed rgba(112,70,232,.28);
+  border:1px solid rgba(112,70,232,.12);
   background:rgba(255,255,255,.55);
-  overflow:hidden;
 }
 
-.info-panel::before{
-  content:"";
-  position:absolute;
-  width:100px;
-  height:100px;
-  border-radius:50%;
-  background:rgba(233,250,118,.30);
-  left:-45px;
-  bottom:-58px;
+/* توضیح یک‌خطی */
+.pitch{
+  text-align:center;
+  color:#5E576E;
+  font-size:11.5px;
+  line-height:2;
+  margin-bottom:20px;
 }
 
-.info-panel::after{
-  content:"";
-  position:absolute;
-  top:10px;
-  left:10px;
-  width:22px;
-  height:22px;
-  border-radius:50%;
-  border:1px dotted rgba(112,70,232,.35);
-}
-
-.info-heading{
-  position:relative;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  color:var(--purple-dark);
-  font-size:12px;
-  font-weight:900;
-}
-
-.info-symbol{
-  width:30px;
-  height:30px;
-  flex:0 0 30px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:11px;
-  color:#423080;
-  background:var(--lime);
-  font-size:15px;
-  font-weight:900;
-  box-shadow:0 4px 12px rgba(233,250,118,.5);
-}
-
-.info-desc{
-  position:relative;
-  margin-top:9px;
-  color:#777184;
-  font-size:10px;
-  line-height:2.1;
-}
-
-/* ---------- دکمه دانلود ---------- */
-.download-area{
-  margin-top:22px;
-}
-
+/* ===== دکمه دانلود اصلی ===== */
 .download-btn{
   position:relative;
-  width:100%;
-  min-height:64px;
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:13px;
-  overflow:hidden;
-  border-radius:19px;
-  border:1.5px solid rgba(75,45,156,.20);
+  gap:10px;
+  width:100%;
+  min-height:58px;
+  border-radius:16px;
+  border:1.5px solid rgba(75,45,156,.18);
   background:linear-gradient(110deg,#8057F1,#7046E8 55%,#5A38C5);
-  box-shadow:
-    0 12px 28px rgba(112,70,232,.26),
-    inset 0 1px 0 rgba(255,255,255,.30);
+  box-shadow:0 8px 22px rgba(112,70,232,.24);
   color:#fff;
   font-family:inherit;
-  font-size:15px;
+  font-size:14.5px;
   font-weight:900;
   text-decoration:none;
-  transition:transform .18s ease, box-shadow .18s ease;
-}
-
-.download-btn::after{
-  content:"";
-  position:absolute;
-  inset:5px;
-  border-radius:14px;
-  border:1px dashed rgba(255,255,255,.28);
-  pointer-events:none;
-}
-
-.download-btn::before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:-120%;
-  width:70%;
-  height:100%;
-  transform:skewX(-22deg);
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);
-  animation:shine 4.8s ease-in-out infinite;
-}
-
-@keyframes shine{
-  0%,62%{ left:-120%; }
-  100%{ left:160%; }
+  transition:transform .15s ease;
 }
 
 .download-btn:active{
   transform:scale(.98);
-  box-shadow:0 5px 14px rgba(112,70,232,.20);
 }
 
-.download-symbol{
-  position:relative;
-  z-index:1;
-  width:34px;
-  height:34px;
+.download-btn .icon{
+  width:30px;
+  height:30px;
   display:flex;
   align-items:center;
   justify-content:center;
-  border-radius:11px;
+  border-radius:9px;
   background:var(--lime);
   color:#3B2B78;
-  font-size:21px;
+  font-size:18px;
   line-height:1;
-  box-shadow:0 4px 12px rgba(233,250,118,.45);
+  flex-shrink:0;
 }
 
-.download-label{
+.download-btn .text{
   position:relative;
   z-index:1;
+}
+
+/* نقطه‌چین داخل دکمه */
+.download-btn::after{
+  content:"";
+  position:absolute;
+  inset:5px;
+  border-radius:12px;
+  border:1px dashed rgba(255,255,255,.22);
+  pointer-events:none;
 }
 
 .download-caption{
@@ -618,23 +314,99 @@ body::before{
   color:#A09AAA;
   font-size:9px;
   line-height:1.9;
-  margin-top:11px;
+  margin-top:10px;
 }
 
-/* ---------- فوتر ---------- */
-.bottom-rule{
+/* ===== مشخصات فشرده ===== */
+.specs{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin:20px 0 18px;
+}
+
+.spec{
+  position:relative;
+  padding:12px 4px 10px;
+  text-align:center;
+  border-radius:14px;
+  background:rgba(255,255,255,.70);
+  border:1px solid rgba(112,70,232,.12);
+}
+
+.spec:nth-child(1){ border-bottom:2.5px solid var(--purple); }
+.spec:nth-child(2){ border-top:2.5px dotted var(--purple); }
+.spec:nth-child(3){ border-left:2.5px dashed var(--purple); }
+
+.spec-value{
+  color:var(--purple-dark);
+  font-size:11.5px;
+  font-weight:900;
+  direction:ltr;
+  white-space:nowrap;
+}
+
+.spec-label{
+  margin-top:4px;
+  color:#9690A1;
+  font-size:8.5px;
+  font-weight:600;
+}
+
+/* ===== پنل امنیت ===== */
+.security-note{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  padding:13px 14px;
+  border-radius:14px;
+  border:1.5px dashed rgba(112,70,232,.26);
+  background:rgba(255,255,255,.50);
+}
+
+.security-note .check{
+  width:26px;
+  height:26px;
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:8px;
+  background:var(--lime);
+  color:#423080;
+  font-size:13px;
+  font-weight:900;
+}
+
+.security-note .txt{
+  font-size:10px;
+  line-height:1.9;
+  color:#777184;
+}
+
+.security-note .txt strong{
+  display:block;
+  color:var(--purple-dark);
+  font-size:11px;
+  font-weight:800;
+  margin-bottom:1px;
+}
+
+/* ===== جداکننده نقطه‌چین ===== */
+.divider{
   height:1px;
-  margin:20px 0 14px;
-  background-image:linear-gradient(90deg,rgba(112,70,232,.30) 45%,transparent 45%);
-  background-size:8px 1px;
+  margin:18px 0 14px;
+  background-image:linear-gradient(90deg,rgba(112,70,232,.30) 50%,transparent 50%);
+  background-size:7px 1px;
   background-repeat:repeat-x;
 }
 
+/* ===== فوتر ===== */
 .footer{
   text-align:center;
   color:#9891A1;
-  font-size:10px;
-  line-height:2;
+  font-size:9.5px;
+  line-height:1.9;
 }
 
 .footer strong{
@@ -642,33 +414,13 @@ body::before{
   font-weight:900;
 }
 
-/* ---------- ذرات تزئینی ---------- */
-.glow-dot{
-  position:absolute;
-  border-radius:50%;
-  background:var(--lime);
-  box-shadow:0 0 14px rgba(233,250,118,.9);
-  pointer-events:none;
-}
-.glow-dot.a{ top:16px; right:16px; width:6px; height:6px; }
-.glow-dot.b{ bottom:16px; left:16px; width:6px; height:6px; }
-
-/* ---------- ریسپانسیو ---------- */
-@media(max-width:370px){
-  body{ padding:18px 12px; }
-  .content{ padding:21px 15px; }
-  .app-title{ font-size:24px; }
-  .heading{ font-size:19px; }
-  .spec-value{ font-size:12px; }
-  .icon-wrap{ width:112px; height:112px; }
-}
-
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{
-    animation-duration:.01ms!important;
-    animation-iteration-count:1!important;
-    scroll-behavior:auto!important;
-  }
+/* ===== ریسپانسیو ===== */
+@media(max-width:360px){
+  body{ padding:16px 12px; }
+  .hero{ padding:26px 18px 22px; }
+  .body{ padding:20px 16px 18px; }
+  .app-name{ font-size:21px; }
+  .spec-value{ font-size:10.5px; }
 }
 </style>
 </head>
@@ -678,126 +430,94 @@ body::before{
 <main class="page">
 
   <!-- برند بالا -->
-  <div class="brand">
-    <span class="brand-line"></span>
-    <span class="brand-dot"></span>
-    <span class="brand-text">دریافت نسخه رسمی اپلیکیشن</span>
-    <span class="brand-dot"></span>
-    <span class="brand-line right"></span>
+  <div class="top-bar">
+    <span class="dash"></span>
+    <span class="label">دریافت نسخه رسمی</span>
+    <span class="dash right"></span>
   </div>
 
-  <!-- قاب اصلی -->
-  <section class="stage">
+  <!-- کارت -->
+  <section class="card">
 
-    <span class="glow-dot a"></span>
-    <span class="glow-dot b"></span>
+    <!-- هدر: آیکون + نام -->
+    <div class="hero">
+      <span class="dot a"></span>
+      <span class="dot b"></span>
+      <span class="dot c"></span>
 
-    <!-- نقطه‌های ظریف کناری -->
-    <div class="side-tick left">
-      <span></span><span></span><span></span>
-    </div>
-    <div class="side-tick right">
-      <span></span><span></span><span></span>
-    </div>
-
-    <div class="card">
-
-      <!-- هدر -->
-      <header class="hero">
-
-        <div class="hero-grid"></div>
-
-        <div class="top-strip">
-          <div class="hero-tag">نسخه اندروید</div>
-          <div class="hero-mini-dots">
-            <span></span><span></span><span></span>
-          </div>
-        </div>
-
-        <div class="icon-wrap">
-          <img
-            src="icon.png"
-            class="app-icon"
-            alt="خدمات رضی"
-            onerror="this.style.display='none'"
-          >
-        </div>
-
-        <h1 class="app-title">خدمات رضی</h1>
-
-        <p class="app-sub">دسترسی آسان به خدمات و امکانات</p>
-
-      </header>
-
-      <div class="dot-divider"></div>
-
-      <!-- محتوا -->
-      <div class="content">
-
-        <div class="release-row">
-          <div class="release-pill">
-            <span class="release-dot"></span>
-            آخرین نسخه منتشرشده
-          </div>
-          <div class="release-version">VERSION 20.02.12</div>
-        </div>
-
-        <h2 class="heading">دریافت اپلیکیشن خدمات رضی</h2>
-
-        <p class="desc">
-          نسخه رسمی برنامه را دریافت کنید و از امکانات آن در دستگاه اندرویدی خود استفاده کنید.
-        </p>
-
-        <!-- مشخصات -->
-        <div class="specs">
-          <div class="spec">
-            <div class="spec-value">20.02.12</div>
-            <div class="spec-label">شماره نسخه</div>
-          </div>
-          <div class="spec">
-            <div class="spec-value">ANDROID</div>
-            <div class="spec-label">سیستم‌عامل</div>
-          </div>
-          <div class="spec">
-            <div class="spec-value">APK</div>
-            <div class="spec-label">نوع فایل</div>
-          </div>
-        </div>
-
-        <!-- پنل اطلاعات -->
-        <div class="info-panel">
-          <div class="info-heading">
-            <span class="info-symbol">✓</span>
-            دریافت مستقیم از مخزن رسمی
-          </div>
-          <p class="info-desc">
-            فایل نصب از بخش انتشار نسخه‌های مخزن رسمی GitHub دریافت می‌شود.
-          </p>
-        </div>
-
-        <!-- دکمه دانلود -->
-        <div class="download-area">
-          <a
-            id="downloadBtn"
-            class="download-btn"
-            href="https://github.com/iran98ir/Khadamat-razi/releases/latest"
-          >
-            <span class="download-symbol">↓</span>
-            <span class="download-label">دانلود و نصب اپلیکیشن</span>
-          </a>
-
-          <p class="download-caption">
-            فایل نصب اندروید با فرمت APK
-          </p>
-        </div>
-
-        <div class="bottom-rule"></div>
-
-        <footer class="footer">
-          نسخه رسمی اپلیکیشن <strong>خدمات رضی</strong>
-        </footer>
-
+      <div class="icon-box">
+        <img
+          src="icon.png"
+          alt="خدمات راضی"
+          onerror="this.style.display='none'"
+        >
       </div>
+
+      <h1 class="app-name">خدمات راضی</h1>
+      <p class="app-sub">دسترسی آسان به خدمات و امکانات</p>
+    </div>
+
+    <!-- بدنه -->
+    <div class="body">
+
+      <!-- نشان‌های اعتماد -->
+      <div class="trust-row">
+        <div class="trust-badge">
+          <span class="dot"></span>
+          آخرین نسخه
+        </div>
+        <div class="trust-version">ANDROID · APK</div>
+      </div>
+
+      <!-- توضیح -->
+      <p class="pitch">
+        نسخه رسمی برنامه را دریافت کنید و از امکانات آن در دستگاه اندرویدی خود استفاده کنید.
+      </p>
+
+      <!-- دکمه دانلود -->
+      <a
+        id="downloadBtn"
+        class="download-btn"
+        href="https://github.com/iran98ir/Khadamat-razi/releases/latest"
+      >
+        <span class="icon">↓</span>
+        <span class="text">دانلود و نصب اپلیکیشن</span>
+      </a>
+
+      <p class="download-caption">
+        فایل نصب اندروید با فرمت APK · دریافت از مخزن رسمی GitHub
+      </p>
+
+      <!-- مشخصات -->
+      <div class="specs">
+        <div class="spec">
+          <div class="spec-value">20.02.12</div>
+          <div class="spec-label">شماره نسخه</div>
+        </div>
+        <div class="spec">
+          <div class="spec-value">ANDROID</div>
+          <div class="spec-label">سیستم‌عامل</div>
+        </div>
+        <div class="spec">
+          <div class="spec-value">APK</div>
+          <div class="spec-label">نوع فایل</div>
+        </div>
+      </div>
+
+      <!-- امنیت -->
+      <div class="security-note">
+        <span class="check">✓</span>
+        <div class="txt">
+          <strong>دریافت مستقیم از مخزن رسمی</strong>
+          فایل نصب از بخش انتشار نسخه‌های مخزن رسمی GitHub دریافت می‌شود.
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <footer class="footer">
+        نسخه رسمی اپلیکیشن <strong>خدمات راضی</strong>
+      </footer>
 
     </div>
 
